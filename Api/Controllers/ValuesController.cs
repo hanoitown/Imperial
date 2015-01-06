@@ -13,7 +13,7 @@ namespace Api.Controllers
     public class ValuesController : ApiController
     {
         ITaxService _taxService;
-        IUnitOfWork _uow;
+        IUnitOfWork _uow; 
         public ValuesController(ITaxService taxService, IUnitOfWork uow)
         {
             _taxService = taxService;
