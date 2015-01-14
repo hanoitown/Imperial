@@ -21,12 +21,12 @@ namespace Api.Controllers
         }
 
         // GET api/values
-        public PagedResult<Product> Get(int pageNo = 1, int pageSize = 50, [FromUri] string[] sort = null, string search = null)
+        public PagedResult<Product> Get(int currentPage = 1, int pageSize = 50, [FromUri] string[] sort = null, string search = null)
         {
             var data = _uow.Products.All;
 
             // Determine the number of records to skip
-            int skip = (pageNo - 1) * pageSize;
+            int skip = (currentPage - 1) * pageSize;
 
             if (!string.IsNullOrEmpty(search))
             {
@@ -37,7 +37,7 @@ namespace Api.Controllers
                 }
             }
 
-            if (sort != null)
+            if (sort.Length != 0)
             {
                 data = data.ApplySorting(sort);
             }
@@ -57,13 +57,13 @@ namespace Api.Controllers
             
 
             // Return the paged results
-            return new PagedResult<Product>(products, pageNo, pageSize, totalItemCount);
+            return new PagedResult<Product>(products, currentPage, pageSize, totalItemCount);
         }
 
         // GET api/values/5
         public Product Get(string id)
         {
-            return _uow.Products.All.Where(p => p.Name.Contains(id)).FirstOrDefault();
+            return _uow.Products.All.Where(p => p.Id.ToString().Equals(id)).FirstOrDefault();
         }
 
         // POST api/values

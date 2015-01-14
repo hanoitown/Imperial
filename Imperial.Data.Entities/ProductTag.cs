@@ -8,11 +8,12 @@ namespace Imperial.Data.Entities
     public class ProductTag
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public int Count { get; set; }
+        public Tag Tag{ get; set; }
+        public Product Product { get; set; }
         public ProductTag()
         {
-            Products = new List<Product>();
+
         }
     }
 }
