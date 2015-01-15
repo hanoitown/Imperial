@@ -10,6 +10,7 @@ namespace Imperial.Data.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool IsActive { get; set; }
         public ICollection<ProductPrice> Prices { get; set; }
 
     }
